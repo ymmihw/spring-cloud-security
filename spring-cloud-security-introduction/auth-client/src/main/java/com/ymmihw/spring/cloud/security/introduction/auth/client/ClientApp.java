@@ -1,11 +1,13 @@
-package com.ymmihw.spring.cloud.security.introduction.auth.resource;
+package com.ymmihw.spring.cloud.security.introduction.auth.client;
+
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
 @SpringBootApplication
-public class Application {
+public class ClientApp {
   public static void main(String[] args) {
-    SpringApplication.run(Application.class, args);
+    SpringApplication.run(ClientApp.class, args);
   }
 }

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestOperations;
 
 @RestController
-public class CloudSiteController {
+public class ClientController {
 
   @Autowired
   private RestOperations restOperations;

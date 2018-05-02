@@ -15,7 +15,7 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 @EnableZuulProxy
 @Configuration
 @EnableOAuth2Sso
-public class SiteSecurityConfigurer extends WebSecurityConfigurerAdapter {
+public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {

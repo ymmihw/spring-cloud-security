@@ -9,11 +9,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 
 @Configuration
 @EnableWebSecurity
-@EnableOAuth2Client
 public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
 
