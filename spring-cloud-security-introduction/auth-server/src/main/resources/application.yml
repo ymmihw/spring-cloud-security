@@ -1,0 +1,16 @@
+server:
+  port: 7070
+  servlet:
+    contextPath: /authserver
+jwt:
+  certificate:
+    store:
+      file: classpath:/certificate/mykeystore.jks
+      password: abirkhan04
+    key:
+      alias: myauthkey
+      password: abirkhan04
+security:
+  oauth2:
+    resource:
+      filter-order: 3
