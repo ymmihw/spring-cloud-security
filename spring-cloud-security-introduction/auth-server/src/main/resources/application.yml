@@ -10,7 +10,3 @@ jwt:
     key:
       alias: myauthkey
       password: abirkhan04
-security:
-  oauth2:
-    resource:
-      filter-order: 3
