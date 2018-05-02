@@ -1,12 +1,10 @@
 package com.ymmihw.spring.cloud.security.introduction.auth.server.config;
 
 import java.security.KeyPair;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -30,9 +28,6 @@ public class AuthServerConfigurer extends AuthorizationServerConfigurerAdapter {
   @Value("${jwt.certificate.key.password}")
   private String keyPassword;
 
-  @Autowired
-  private UserDetailsService userDetailsService;
-
   @Override
   public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
     clients.inMemory().withClient("authserver").secret("passwordforauthserver")
@@ -43,8 +38,7 @@ public class AuthServerConfigurer extends AuthorizationServerConfigurerAdapter {
 
   @Override
   public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-    endpoints.accessTokenConverter(jwtAccessTokenConverter())
-        .userDetailsService(userDetailsService);
+    endpoints.accessTokenConverter(jwtAccessTokenConverter());
   }
 
   @Bean
