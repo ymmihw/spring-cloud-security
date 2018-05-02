@@ -52,7 +52,4 @@
    </snapshots>
   </repository>
  </repositories>
- <modules>
-  <module>spring-cloud-security-introduction</module>
- </modules>
 </project>
