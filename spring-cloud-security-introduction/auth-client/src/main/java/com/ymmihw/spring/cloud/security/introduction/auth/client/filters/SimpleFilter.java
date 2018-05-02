@@ -1,16 +1,15 @@
 package com.ymmihw.spring.cloud.security.introduction.auth.client.filters;
 
-import javax.servlet.http.HttpServletRequest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 
 @Configuration
 public class SimpleFilter extends ZuulFilter {
 
-  private static Logger log = LoggerFactory.getLogger(SimpleFilter.class);
 
   @Override
   public String filterType() {
@@ -29,11 +28,11 @@ public class SimpleFilter extends ZuulFilter {
 
   @Override
   public Object run() {
-    RequestContext ctx = RequestContext.getCurrentContext();
-    HttpServletRequest request = ctx.getRequest();
-
-    log.info(
-        String.format("%s request to %s", request.getMethod(), request.getRequestURL().toString()));
+    RequestContext context = RequestContext.getCurrentContext();
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails) authentication.getDetails();
+    String tokenValue = details.getTokenValue();
+    context.addZuulRequestHeader("Authorization", "bearer " + tokenValue);
 
     return null;
   }
