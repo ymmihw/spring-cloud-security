@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -30,7 +32,9 @@ public class AuthServerConfigurer extends AuthorizationServerConfigurerAdapter {
 
   @Override
   public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-    clients.inMemory().withClient("authserver").secret("passwordforauthserver")
+    PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    clients.inMemory().withClient("authserver")
+        .secret(passwordEncoder.encode("passwordforauthserver"))
         .redirectUris("http://localhost:8080/")
         .authorizedGrantTypes("authorization_code", "refresh_token").scopes("myscope")
         .autoApprove(true).accessTokenValiditySeconds(30).refreshTokenValiditySeconds(1800);
