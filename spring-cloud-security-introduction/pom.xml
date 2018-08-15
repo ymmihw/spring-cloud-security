@@ -18,4 +18,9 @@
  </properties>
  <dependencies>
  </dependencies>
+ <modules>
+  <module>auth-client</module>
+  <module>auth-resource</module>
+  <module>auth-server</module>
+ </modules>
 </project>
